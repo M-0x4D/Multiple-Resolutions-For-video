@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ Route::post('/video', function(Request $request){
     }
 });
 
+//getVideoWithFitResolution
+Route::post('/fit/resolution', [VideoController::class , 'getVideoWithFitResolution']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

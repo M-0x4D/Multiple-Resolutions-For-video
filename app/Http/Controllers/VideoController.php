@@ -60,7 +60,7 @@ class VideoController extends Controller
                     $video->save($format, $path . $label . '_' . $filename);
                 }
 
-                return view('upload', ['successMessage' => 'success', 'video' => "storage/videos/240p_{$filename}" , 'fileName' => $filename]);
+                return view('upload', ['successMessage' => 'success', 'video' => "storage/videos/240p_{$filename}", 'fileName' => $filename]);
             }
 
             return view('upload', ['errorMessage' => 'there is no video file']);
@@ -69,5 +69,44 @@ class VideoController extends Controller
         }
     }
 
-    
+    function getVideoWithFitResolution(Request $request)
+    {
+        $fileName = $request->fileName;
+        $speed = $request->speed;
+        $url = '';
+        switch ($speed) {
+            case $speed < 2:
+                # code...
+                $url = "storage/videos/240p_{$fileName}";
+                break;
+            case $speed < 3:
+                # code...
+                $url = "storage/videos/360p_{$fileName}";
+                break;
+
+            case $speed < 4:
+                # code...
+                $url = "storage/videos/480p_{$fileName}";
+                break;
+            case $speed < 5:
+                # code...
+                $url = "storage/videos/720p_{$fileName}";
+                break;
+            case $speed < 6:
+                # code...
+                $url = "storage/videos/1080p_{$fileName}";
+                break;
+            case $speed < 7:
+                # code...
+                $url = "storage/videos/360p_{$fileName}";
+                break;
+
+            default:
+                # code...
+                $url = "storage/videos/240p_{$fileName}";
+                break;
+        }
+
+        return response()->json(['url' => $url]);
+    }
 }
