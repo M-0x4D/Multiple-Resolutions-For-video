@@ -18,12 +18,13 @@ Route::post('/upload-video', [VideoController::class, 'upload']);
 
 Route::get('/upload', function(){
     return view('upload');
-});
+})->name('upload');
 
 
 
 
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    return redirect()->route('upload');
 });

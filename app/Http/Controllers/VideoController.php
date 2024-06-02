@@ -37,10 +37,10 @@ class VideoController extends Controller
                 // Define resolutions
                 $resolutions = [
                     '240p' => [426, 240],
-                    '360p' => [640, 360],
-                    '480p' => [854, 480],
-                    '720p' => [1280, 720],
-                    '1080p' => [1920, 1080],
+                    // '360p' => [640, 360],
+                    // '480p' => [854, 480],
+                    // '720p' => [1280, 720],
+                    // '1080p' => [1920, 1080],
                 ];
 
                 foreach ($resolutions as $label => $dimensions) {
@@ -71,8 +71,8 @@ class VideoController extends Controller
 
     function getVideoWithFitResolution(Request $request)
     {
-        $fileName = $request->fileName;
-        $speed = $request->speed;
+        $fileName = $request->name;
+        $speed = $request->speed ?? 1;
         $url = '';
         switch ($speed) {
             case $speed < 2:
@@ -106,6 +106,7 @@ class VideoController extends Controller
                 $url = "storage/videos/240p_{$fileName}";
                 break;
         }
+        $url = 'http://localhost:8000/'. $url;
 
         return response()->json(['url' => $url]);
     }

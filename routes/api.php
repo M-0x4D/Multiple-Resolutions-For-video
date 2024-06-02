@@ -22,7 +22,7 @@ Route::post('/video', function(Request $request){
 });
 
 //getVideoWithFitResolution
-Route::post('/fit/resolution', [VideoController::class , 'getVideoWithFitResolution']);
+Route::post('fit/resolution', [VideoController::class , 'getVideoWithFitResolution'])->name('fit');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
